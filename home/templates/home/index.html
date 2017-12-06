@@ -1,0 +1,46 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+{% block page %}
+    {% load home_extras %}
+    <h1>{% get_attribute 'SITE_URL' %}</h1>
+    <h1>Публикации</h1>
+    {% if article_lists %}
+        {% for article in article_lists %}
+            <article>
+                <a href="{{ article.get_absolute_url }}">
+                    <h2>{{ article.article_name }}</h2>
+                </a>
+                {{ article.desctription|safe }}
+                <p><a class="btn btn-default btn-sm" href="{{ article.get_absolute_url }}">Читать далее</a></p>
+{#                {% include 'knowledge/article_footer.html' %}#}
+                <a href="http://vk.com/share.php?url=https://hitparad.kz{{ article.get_absolute_url }}"
+                   target="_blank" rel="nofollow">
+                    {{ article.article_name }}
+                    <img src="{% static 'images/social/vk.png' %}">
+                </a>
+                <a href="https://twitter.com/share?url=https://hitparad.kz{{ article.get_absolute_url }}"
+                   target="_blank" rel="nofollow">
+                    {{ article.article_name }}
+                    <img src="{% static 'images/social/twitter.png' %}">
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://hitparad.kz{{ article.get_absolute_url }}"
+                   target="_blank" rel="nofollow">
+                    {{ article.article_name }}
+                    <img src="{% static 'images/social/facebook.png' %}">
+                </a>
+                <a href="https://plus.google.com/share?url=https://hitparad.kz{{ article.get_absolute_url }}"
+                   target="_blank" rel="nofollow">
+                    {{ article.article_name }}
+                    <img src="{% static 'images/social/google-plus.png' %}">
+                </a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://hitparad.kz{{ article.get_absolute_url }}"
+                   target="_blank" rel="nofollow">
+                    {{ article.article_name }}
+                    <img src="{% static 'images/social/linkedin.png' %}">
+                </a>
+            </article>
+        {% endfor %}
+    {% endif %}
+{% load bootstrap3 %}
+{% bootstrap_pagination article_lists %}
+{% endblock %}

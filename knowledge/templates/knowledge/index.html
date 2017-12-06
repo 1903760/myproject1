@@ -1,0 +1,15 @@
+{% extends 'home/base.html' %}
+{% block page %}
+    <article>
+    <h1>Разделы</h1>
+    {% if section_list %}
+        <ul>
+        {% for section in section_list %}
+            <li>
+            <a href="{% url 'news:section' section.section_url %}">{{ section.section_title }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </article>
+{% endblock %}

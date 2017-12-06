@@ -1,0 +1,19 @@
+{% extends 'home/base.html' %}
+{% block page %}
+    <article>
+    <h1>{{ section.section_title }}</h1>
+        <p>{{ section.section_description|safe }}</p>
+        <h2>Статьи</h2>
+        <ul>
+        {% for article in section.article_set.all|dictsort:'article_title' %}
+            {% if article.article_status %}
+            <li>
+            <a href="{% url 'news:article' section.section_url article.id %}">
+                {{ article.article_title }}
+            </a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </article>
+{% endblock %} 
